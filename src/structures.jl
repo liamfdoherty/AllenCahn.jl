@@ -10,6 +10,7 @@ struct AllenCahnProblem1D{TLBC, TRBC, TA}
     b::Real # Right endpoint
     ϵ::Real # Model parameter
     nₓ::Int # Total number of spatial mesh points
+    Δx::Real # Spatial mesh spacing
     x::Vector # Interior of the spatial mesh
     nₜ::Int # Number of timesteps
     Δt::Real # Length of timestep

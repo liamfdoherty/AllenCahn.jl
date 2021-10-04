@@ -6,5 +6,5 @@ function AllenCahnProblem1D(a, b, ϵ, nₓ, nₜ, left_bc::TLBC, right_bc::TRBC)
     Δx = (b - a)/(nₓ - 1)
     x = [a + i*Δx for i ∈ 1:nₓ - 2]
     Δt = 1/nₜ
-    return AllenCahnProblem1D(a, b, ϵ, nₓ, x, nₜ, Δt, left_bc, right_bc)
+    return AllenCahnProblem1D(a, b, ϵ, nₓ, Δx, x, nₜ, Δt, left_bc, right_bc, spzeros(nₓ, nₓ), zeros(nₓ))
 end
