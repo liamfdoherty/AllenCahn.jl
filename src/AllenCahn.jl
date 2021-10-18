@@ -4,7 +4,7 @@ using SparseArrays
 using LinearAlgebra
 
 include("structures.jl")
-export AllenCahnProblem1D, NeumannBC, BackwardEulerMethod
+export AllenCahnProblem1D, NeumannBC, PeriodicBC, BackwardEulerMethod
 
 include("constructors.jl")
 export AllenCahnProblem1D

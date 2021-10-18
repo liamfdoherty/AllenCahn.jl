@@ -38,6 +38,14 @@ struct NeumannBC <: BoundaryCondition
 end
 
 """
+`PeriodicBC` - structure to house a Periodic boundary condition, i.e., a boundary condition for which
+
+u(a) = u(b), uₓ(a) = uₓ(b)
+"""
+struct PeriodicBC <: BoundaryCondition
+end
+
+"""
 `TimeSteppingMethod` - abstract type to include time stepping methods
 """
 abstract type TimeSteppingMethod end
