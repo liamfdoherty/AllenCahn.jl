@@ -51,7 +51,13 @@ end
 abstract type TimeSteppingMethod end
 
 """
-`BackwardEulerMethod` - structure for backward euler method
+`BackwardEulerMethod` - structure for Backward Euler method
 """
 struct BackwardEulerMethod <: TimeSteppingMethod
+end
+
+"""
+`CrankNicolsonMethod` - structure for Crank-Nicolson method
+"""
+struct CrankNicolsonMethod <: TimeSteppingMethod
 end

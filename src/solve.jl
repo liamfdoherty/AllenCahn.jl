@@ -14,3 +14,21 @@ function solve(problem::AllenCahnProblem1D, stepping_method::TTSM) where {TTSM <
     end
     return u
 end
+
+function solve(problem::AllenCahnProblem1D, stepping_method::TTSM) where {TTSM <: CrankNicolsonMethod}
+    u = problem.u
+    n = 1
+    left_matrix = sparse(Matrix(1.0I, size(problem.A)[1], size(problem.A)[2])) - (problem.Δt*problem.ϵ/2)*problem.A
+    right_matrix = sparse(Matrix(1.0I, size(problem.A)[1], size(problem.A)[2])) + (problem.Δt*problem.ϵ/2)*problem.A
+    while n <= problem.nₜ
+        b = right_matrix*u + problem.Δt*problem.rhs
+        u = left_matrix\b
+        n += 1
+    end
+    if typeof(problem.left_bc) <: PeriodicBC && typeof(problem.right_bc) <: PeriodicBC
+        # Add the last point
+        push!(problem.x, problem.a + (problem.nₓ + 1)*problem.Δx)
+        push!(u, u[1])
+    end
+    return u
+end
