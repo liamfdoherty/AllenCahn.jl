@@ -9,22 +9,41 @@ struct AllenCahnProblem1D{TLBC, TRBC, TA}
     a::Real # Left endpoint
     b::Real # Right endpoint
     ϵ::Real # Model parameter
-    nₓ::Int # Total number of spatial mesh points
+    nₓ::Int # Total number of interior spatial mesh points
     Δx::Real # Spatial mesh spacing
-    x::Vector # Interior of the spatial mesh
+    x::Vector # Spatial mesh points including boundary
     nₜ::Int # Number of timesteps
+    t_max::Real # Final time for integration
     Δt::Real # Length of timestep
     left_bc::TLBC # Boundary condition on the left endpoint
     right_bc::TRBC # Boundary condition on the right endpoint
     A::TA # Matrix approximation of differential operator for the problem
     rhs::Vector # Right hand side of the end system
+    f::Function # Nonlinear part of semilinear ODE system (u - u³ for this problem)
+    u::Vector # Solution of the problem
 end
+
+"""
+`BoundaryCondition` - abstract type to include boundary conditions
+"""
+abstract type BoundaryCondition end
 
 """
 `NeumannBC` - structure to house a Neumann boundary condition, i.e., a boundary condition for which
 
 uₓ(a) = vₗ  or  uₓ(b) = vᵣ
 """
-struct NeumannBC
+struct NeumannBC <: BoundaryCondition
     boundary_condition::Real
+end
+
+"""
+`TimeSteppingMethod` - abstract type to include time stepping methods
+"""
+abstract type TimeSteppingMethod end
+
+"""
+`BackwardEulerMethod` - structure for backward euler method
+"""
+struct BackwardEulerMethod <: TimeSteppingMethod
 end
