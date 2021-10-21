@@ -7,7 +7,7 @@ u₀(x) = 1.
 problem = AllenCahnProblem1D(a, b, ϵ, nₓ, nₜ, t_max, left_bc, right_bc, u₀)
 assemble_system!(problem)
 tsm = CrankNicolsonMethod()
-u = solve(problem, tsm)
+t, u = solve(problem, tsm)
 
-error = abs.(ones(length(u)) - u)
+error = abs.(ones(length(u[end])) - u[end])
 norm(error, Inf) < 1e-14

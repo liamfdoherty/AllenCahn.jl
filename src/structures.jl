@@ -1,9 +1,9 @@
 """
 `AllenCahnProblem1D` - structure to solve the one-dimensional Allen-Cahn equation, that is, solves
 
-uₜ = -Auₓₓ + f(u)
+uₜ = Auₓₓ + f(u)
 
-on (a, b), where A = -Δ and f(u) = -u³ + u.
+on (a, b), where A = Δ and f(u) = -u³ + u.
 """
 struct AllenCahnProblem1D{TLBC, TRBC, TA}
     a::Real # Left endpoint

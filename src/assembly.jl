@@ -15,13 +15,6 @@ function assemble_system!(problem::AllenCahnProblem1D{TLBC, TRBC, TA}) where {TL
     problem.A[end, end - 1] = 2
 
     @. problem.A *= 1/(problem.Δx)^2
-
-    # Construct the right hand side of the system (nonlinear term plus correction for nonhomogeneous boundary conditions)
-    problem.rhs .+= problem.f.(problem.u)
-    boundary_correction = zeros(problem.nₓ + 2)
-    boundary_correction[1] = -2*problem.left_bc.boundary_condition/problem.Δx
-    boundary_correction[end] = 2*problem.right_bc.boundary_condition/problem.Δx
-    problem.rhs .+= boundary_correction
     
     return problem
 end
@@ -45,9 +38,6 @@ function assemble_system!(problem::AllenCahnProblem1D{TLBC, TRBC, TA}) where {TL
     problem.A[end, end] = -2
 
     @. problem.A *= 1/(problem.Δx)^2
-
-    # Construct the right hand side of the system (nonlinear term, there is no correction for BCs)
-    problem.rhs .+= problem.f.(problem.u)
     
     return problem
 end
